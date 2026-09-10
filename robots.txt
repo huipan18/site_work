@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /translations/
+Disallow: /*.py$
+
+Sitemap: https://www.officialpoppoagency.com/sitemap-index.xml

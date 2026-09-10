@@ -1,0 +1,51 @@
+LOCAL COMMERCIAL-PERMISSIVE TRANSLATION PATCH
+=============================================
+
+WHY
+---
+The previous public translate.googleapis.com endpoint returned HTTP 429 before the
+first translation batch could finish. Waiting longer does not reliably solve an
+IP/session quota block.
+
+DEFAULT LOCAL MODELS
+--------------------
+* facebook/m2m100_418M
+  License: MIT
+  Used for every requested non-English locale except Telugu.
+
+* Helsinki-NLP/opus-mt-en-dra
+  License: Apache-2.0
+  Used only for Telugu because M2M100 does not support Telugu.
+
+These models run only while BUILDING the static pages. Nothing is shipped into the
+browser and Hostinger does not need Python, Torch or Transformers.
+
+INSTALL ONCE
+------------
+python -m pip install -r requirements-build.txt
+python -m pip install -r requirements-local-translation.txt
+
+BUILD
+-----
+python prepare_multilingual.py
+
+The first run downloads the translation model files. Later builds reuse the local
+Hugging Face cache.
+
+RESUME
+------
+Every successful translation batch is written immediately to translations/*.json.
+If the process is interrupted, run the same command again. Existing completed
+translations are retained and skipped.
+
+CPU / GPU
+---------
+The script uses CUDA automatically only if your installed PyTorch reports CUDA as
+available. Otherwise it uses CPU.
+
+Force CPU:
+python prepare_multilingual.py --device cpu
+
+The old public Google endpoint remains available only when explicitly selected:
+python prepare_multilingual.py --provider google
+It is not recommended because 429 can recur.

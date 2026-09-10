@@ -1,0 +1,19 @@
+HTTP 429 PATCH
+==============
+Your traceback was caused by translate.googleapis.com returning HTTP 429 (Too Many Requests).
+The earlier translator issued one network request for each missing string. With hundreds of strings
+across 29 non-English locales, that request pattern is too aggressive.
+
+This patch changes the translator to:
+1. Batch strings into substantially fewer requests.
+2. Save translation JSON after each successful batch.
+3. Retry 429/5xx/network errors with exponential backoff and jitter.
+4. Resume automatically because already-populated translation keys are skipped.
+5. Prevent <!DOCTYPE html> from entering the translation catalog.
+6. Leave the website's primary CSS/design architecture unchanged.
+
+Use:
+  python prepare_multilingual.py
+
+If needed, use the more conservative mode:
+  python prepare_multilingual.py --delay 2.5 --batch-size 12 --max-chars 1400

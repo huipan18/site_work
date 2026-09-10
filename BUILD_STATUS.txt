@@ -1,0 +1,22 @@
+BUILD STATUS — PATCHED
+======================
+The multilingual architecture, static generator, language switcher, SEO metadata generation,
+hreflang/canonical logic, RTL CSS, sitemap generation, JavaScript localization hooks and validator
+are implemented.
+
+PATCHES INCLUDED AFTER THE HTTP 429 REPORT
+- Translation requests are batched instead of one HTTP call per string.
+- HTTP 429 and temporary 5xx/network failures use automatic exponential backoff + jitter.
+- Translation progress is checkpointed after every successful batch and is resumable.
+- <!DOCTYPE html> is no longer extracted or translated.
+- Language-selector display labels are no longer sent for translation.
+- Production generation still refuses to silently publish missing translations.
+
+RUN:
+  python -m pip install -r requirements-build.txt
+  python prepare_multilingual.py
+
+If the service is unusually restrictive on your network, use:
+  python prepare_multilingual.py --delay 2.5 --batch-size 12 --max-chars 1400
+
+Review sensitive SEO/legal/safety/payment/onboarding translations before production upload.

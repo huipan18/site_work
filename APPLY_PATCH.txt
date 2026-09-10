@@ -1,0 +1,18 @@
+IMPORTANT: Keep your existing translations/ folder. It contains the completed translations.
+
+1. Copy these 3 .py files into your existing site_work folder and choose Replace:
+   - extract_translations.py
+   - build_locales.py
+   - validate_locales.py
+
+2. Activate your existing virtual environment:
+   .venv\Scripts\activate
+
+3. Rebuild WITHOUT translating again:
+   python prepare_multilingual.py --skip-translate
+
+The build will remove/recreate each locale folder, so accidental locale paths such as
+ur\.venv\Lib\site-packages\torch\utils\model_dump\skeleton.html
+will be removed automatically.
+
+Do NOT delete translations/*.json.

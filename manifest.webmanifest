@@ -1,0 +1,17 @@
+{
+  "name": "Official Poppo Agency",
+  "short_name": "Poppo Guide",
+  "description": "Independent Poppo Live guides and creator onboarding support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#603bff",
+  "icons": [
+    {
+      "src": "/assets/images/poppo-live-icon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

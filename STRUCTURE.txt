@@ -1,0 +1,18 @@
+poppolivedownload/
+|-- index.html
+|-- assets/
+|   |-- css/style.css
+|   |-- images/
+|   `-- js/main.js
+|-- agency/index.html
+|-- agency-code/index.html
+|-- coins-recharge/index.html
+|-- contact/index.html
+|-- download/index.html
+|-- earnings/index.html
+|-- faq/index.html
+|-- host/index.html
+|-- privacy/index.html
+|-- rules-safety/index.html
+|-- terms/index.html
+`-- troubleshooting/index.html

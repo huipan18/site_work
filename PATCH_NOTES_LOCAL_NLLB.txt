@@ -1,0 +1,46 @@
+LOCAL NLLB TRANSLATION PATCH
+============================
+
+Why this exists
+---------------
+The public translate.googleapis.com endpoint can return HTTP 429 before even the
+first translation batch completes. Exponential backoff cannot solve an IP/session
+quota block.
+
+The default translator is now facebook/nllb-200-distilled-600M running locally.
+No translation API key or Google translation requests are used.
+
+First-time setup
+----------------
+1. Install the normal build dependencies:
+   python -m pip install -r requirements-build.txt
+
+2. Install local translation dependencies:
+   python -m pip install -r requirements-local-translation.txt
+
+3. Run:
+   python prepare_multilingual.py
+
+The first run downloads the NLLB model from Hugging Face once. Subsequent runs use
+the local model cache.
+
+GPU / CPU
+---------
+The script automatically chooses CUDA when an NVIDIA-compatible PyTorch CUDA build
+is available, otherwise it uses CPU. Force CPU with:
+
+   python prepare_multilingual.py --device cpu
+
+Resume
+------
+Every completed batch is saved immediately. If the machine is restarted or the
+process is interrupted, run the same command again. Finished translations are
+skipped.
+
+Old Google provider
+-------------------
+It is still available only if explicitly requested:
+
+   python prepare_multilingual.py --provider google
+
+It is NOT recommended because HTTP 429 can recur.

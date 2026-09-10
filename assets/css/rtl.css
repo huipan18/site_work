@@ -1,0 +1,15 @@
+/* RTL-only text-flow adjustments. Main site design remains in style.css. */
+html[dir="rtl"] body { direction: rtl; text-align: right; }
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select { text-align: right; }
+html[dir="rtl"] .site-header,
+html[dir="rtl"] .header-actions,
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .official-actions,
+html[dir="rtl"] .language-recommendation-actions { direction: rtl; }
+/* Keep inherently directional identifiers readable. */
+html[dir="rtl"] [data-copy-code],
+html[dir="rtl"] a[href^="tel:"],
+html[dir="rtl"] a[href^="mailto:"],
+html[dir="rtl"] code { direction:ltr; unicode-bidi:isolate; }

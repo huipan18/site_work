@@ -1,0 +1,5 @@
+# Local build-time translation. The models themselves are downloaded on first use.
+transformers>=4.45,<5
+sentencepiece>=0.2,<1
+torch>=2.4
+sacremoses>=0.1
